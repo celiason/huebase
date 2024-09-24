@@ -118,7 +118,9 @@ LIMIT 5;
 (5 rows)
 ```
 
-We can see that the brightest body region measured was the breast patch of the kingfisher _Todiramphus leucopygius_ with a whopping 99% reflectance value! This corresponds to spectrum #1602 that we can easily take a look at more closely if we'd like (e.g., using `WHERE spec_id = 1602`):
+We can see that the brightest body region measured was the breast patch of the kingfisher _Todiramphus leucopygius_ with a whopping 99% reflectance value! This corresponds to spectrum #1602 that we can easily take a look at more closely if we'd like (e.g., using `WHERE spec_id = 1602`).
+
+### Looking at the data for a single measurement
 
 ```sql
 SELECT * 
