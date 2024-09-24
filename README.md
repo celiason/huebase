@@ -1,7 +1,7 @@
-# Here's the readme
+# Color database for birds
 
 ## Motivation
-I have been working on a project using thousands of reflectance spectra to understand bird color evolution. The spreadsheets were getting huge and I decided I wanted to try my hand at creating and working with a SQL database. The flavor I chose to use was `PostgreSQL` and I've been excited about the `SQLalchemy` package in `python` that let's me interact with the database.
+I have been working on a project using thousands of reflectance spectra my colleagues and I measured over the last several years. I'm using information on the bird's color that we can extract from spectra to better understand why birds have certain colors and how they have changed over time. The spreadsheets were getting huge, so I decided I wanted to try my hand at creating and working with a database. The flavor I chose to use was `PostgreSQL` and I've been excited about the `SQLalchemy` package in `python` that let's me interact with the database.
 
 ## Database schema
 Here's a look at the way I've setup the database:
