@@ -44,6 +44,16 @@ LEFT JOIN patches ON metadata.patch_id = patches.patch_id
 WHERE patches.region NOT LIKE '%streaks'
 GROUP BY patch
 LIMIT 5;
+
+            patch             | nspecies 
+------------------------------+----------
+ anterior-auricular           |       67
+ anterior-flank               |       67
+ anterior-malar               |       67
+ anterior-supercilium (lores) |       67
+ base-retrices                |       67
+(5 rows)
+
 ```
 Outputs the following:
 
