@@ -11,7 +11,7 @@ df = pd.read_csv('data/kingfishers.csv')
 
 
 # Initialize the database
-engine = create_engine('postgresql+psycopg2://chad:manbird@localhost:5432/color', echo=True)
+engine = create_engine('postgresql+psycopg2://chad:password@localhost:5432/color', echo=True)
 
 df.columns
 

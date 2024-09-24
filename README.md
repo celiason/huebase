@@ -246,4 +246,3 @@ LIMIT 5;
 
 ## Author
 Chad M. Eliason
-
