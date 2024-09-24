@@ -1,0 +1,102 @@
+-- Learning SQL
+
+-- install
+brew install postgresql
+
+-- start
+brew services start postgresql@14
+brew services list
+
+psql postgres
+
+-- this will list users
+\du
+
+-- create a database
+CREATE DATABASE bird_color;
+
+-- connect to a database
+\c bird_color;
+
+-- create a table in that database
+CREATE TABLE birds(
+	bird_id serial PRIMARY KEY,
+	cat_num integer NOT NULL
+);
+
+-- a bird can have multiple feathers, but a feather only has one bird
+CREATE TABLE feathers(
+	feather_id serial PRIMARY KEY,
+	bird_id INT NOT NULL,
+	patch text NOT NULL,
+	FOREIGN KEY (bird_id) REFERENCES birds(bird_id)
+);
+
+CREATE TABLE readings(
+	meas_id serial PRIMARY KEY,
+	feather_id INT NOT NULL,
+	wl integer NOT NULL,
+	refl integer NOT NULL,
+	inc_angle integer NOT NULL,
+	refl_angle integer NOT NULL,
+	FOREIGN KEY(feather_id) REFERENCES feathers(feather_id)
+);
+
+# list the tables
+\dt
+
+\d feathers
+
+-- remove tables and linked tables
+-- DROP TABLE feathers CASCADE;
+-- DROP TABLE readings;
+
+-- add a new column to a table
+ALTER TABLE feathers
+ADD mech text;
+
+-- insert data into a table
+INSERT INTO birds (cat_num)
+VALUES ('123456');
+INSERT INTO birds (cat_num)
+VALUES ('123455');
+
+INSERT INTO feathers (bird_id, patch)
+VALUES ('1', 'rump');
+
+INSERT INTO feathers (bird_id, patch)
+VALUES ('1', 'back');
+
+INSERT INTO feathers (bird_id, patch)
+VALUES ('2', 'rump');
+
+-- subset data
+SELECT bird_id, cat_num
+FROM birds;
+
+SELECT feather_id, bird_id, patch
+FROM feathers;
+
+-- idea: make webapp where user drags and drops spectra files and then this imports into a SQL database, also adding metadata upon import (or search spec files for comments, etc.)
+
+
+SELECT feather_id, patch, bird_id
+   FROM feathers
+   WHERE patch = 'rump' OR patch = 'NJ'
+   ORDER BY bird_id;
+
+
+-- list tables in a database
+\dt
+
+-- view description of a table
+\d birds
+
+-- create a database from a CSV file
+
+
+
+
+-- clean up
+brew services stop postgresql@14
+
