@@ -6,23 +6,19 @@ import matplotlib.pyplot as plt
 import psycopg2
 
 df = pd.read_csv('data/bbdataconverted.csv')
-df.head()
 
 # df.plot(x='wavelength', y='Back_AcaBaif', kind='line')
 
-df.columns = [c.lower() for c in df.columns] # PostgreSQL doesn't like capitals or spaces
 
+# Initialize the database
 engine = create_engine('postgresql+psycopg2://chad:manbird@localhost:5432/color', echo=True)
 
-# Find unique IDs
+# Add some things to the dataframe before creating tables
+df.columns = [c.lower() for c in df.columns] # PostgreSQL doesn't like capitals or spaces
 df['bird_id'] = df['catalog number'].factorize()[0] + 1
-df['bird_id']
-
 df['family'] = 'Icteridae'
-
 df['tax_id'] = df[['family', 'genus', 'species']].apply(lambda x: '.'.join(x), axis=1)
 df['tax_id'] = df['tax_id'].factorize()[0] + 1
-
 df.head()
 
 # Taxonomy table
@@ -66,7 +62,7 @@ spectra.set_index('spec_id', inplace=True)
 # Reshape the spectra DataFrame to have a column for wavelengths and another for the corresponding values
 spectra_long = pd.melt(spectra.reset_index(), id_vars=['spec_id'], var_name='wl', value_name='reflectance')
 # Convert the wavelength column to numeric, extracting the numeric part from the column names
-# spectra_long['wl'] = spectra_long['wl'].str.extract('(\d+)').astype(int)
+spectra_long['wl'] = spectra_long['wl'].str.extract('(\d+)').astype(int)
 spectra_long.set_index('spec_id', inplace=True)
 spectra_long.head()
 len(spectra_long)  # 350500 rows
@@ -74,15 +70,6 @@ spectra_long.to_sql('spectra', engine)
 
 # I should probably have a column with wavelength and ID then link to that?
 # that way can select wl > 300 and wl < 700 or something like that in a filter
-
-# Here's a cool query that works-
-
-# SELECT species, region patch, COUNT(DISTINCT spectra.spec_id) nspecs
-# FROM spectra
-# LEFT JOIN metadata ON spectra.spec_id = metadata.spec_id
-# LEFT JOIN taxonomy ON metadata.tax_id = taxonomy.tax_id
-# LEFT JOIN patches ON metadata.patch_id = patches.patch_id
-# GROUP BY species, region;
 
 # maybe have it be able to search-
 # 'red birds'
@@ -92,3 +79,6 @@ spectra_long.to_sql('spectra', engine)
 
 # could also have it show a cartoon bird with the coloration
 
+
+
+# df.to_csv('test.csv')
