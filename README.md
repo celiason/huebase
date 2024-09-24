@@ -9,6 +9,7 @@ Here's a look at the way I've setup the database:
 ![](/docs/schema_kingfisher.png)
 
 ## Some cool queries to try
+Once you run `python create-db.py` (after customizing settings for your system, etc.) the database should be setup and ready to go. You can then look at different ways of slicing the data.
 
 ### Patches per species
 Let's say we want to look at the number of unique patches measured for females birds of each species:
