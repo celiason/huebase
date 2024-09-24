@@ -13,7 +13,7 @@ Here's a look at the way I've setup the database:
 ### Patches per species
 Let's say we want to look at the number of unique patches measured for females birds of each species:
 ```sql
-SELECT CONCAT(genus, ' ', species) sciname, sex, COUNT(DISTINCT patches.patch) npatches
+SELECT CONCAT(genus, ' ', species) sciname, sex, COUNT(DISTINCT patch) npatches
 FROM spectra
 LEFT JOIN metadata ON spectra.spec_id = metadata.spec_id
 LEFT JOIN taxonomy ON metadata.tax_id = taxonomy.tax_id
@@ -37,7 +37,7 @@ LIMIT 5;
 ### Spectra per patch
 See how many species we have color data for, grouped by patch:
 ```sql
-SELECT patch, COUNT(DISTINCT taxonomy.species) nspecies 
+SELECT patch, COUNT(DISTINCT species) nspecies 
 FROM spectra
 LEFT JOIN metadata ON spectra.spec_id = metadata.spec_id
 LEFT JOIN taxonomy ON metadata.tax_id = taxonomy.tax_id
@@ -97,7 +97,10 @@ That's better. -->
 ### Top-5 brightest patches on a bird
 
 ```sql
-SELECT spectra.spec_id AS spec, family, CONCAT(genus, ' ', species) sciname, patch, ROUND(MAX(spectra.reflectance)::numeric,2) AS maxrefl
+SELECT  spectra.spec_id AS spec,
+        family, CONCAT(genus, ' ', species) AS sciname,
+        patch,
+        ROUND(MAX(spectra.reflectance)::numeric,2) AS maxrefl
 FROM spectra
 LEFT JOIN metadata ON spectra.spec_id = metadata.spec_id
 LEFT JOIN taxonomy ON metadata.tax_id = taxonomy.tax_id
