@@ -163,7 +163,7 @@ LEFT JOIN metadata ON spectra.spec_id = metadata.spec_id
 LEFT JOIN patches ON metadata.patch_id = patches.patch_id
 WHERE patches.region LIKE 'vent'
 GROUP BY patch, spec
-LIMIT 10;
+LIMIT 5;
 ```
 
 Here's the output:
@@ -175,13 +175,7 @@ Here's the output:
    58 | vent  |    0.03 |    0.55 |    4.20 |   11.22
    96 | vent  |    0.28 |    1.65 |    2.86 |    4.34
   134 | vent  |    1.53 |    1.93 |    4.16 |    9.69
-  172 | vent  |    3.21 |    3.45 |    7.90 |   15.52
-  210 | vent  |    0.42 |    0.96 |    2.87 |    8.04
-  248 | vent  |    2.65 |    2.45 |    7.96 |   10.47
-  286 | vent  |    1.65 |    2.95 |    6.87 |   10.08
-  324 | vent  |    2.31 |    2.20 |    3.43 |    5.36
-  362 | vent  |    2.37 |    2.46 |    5.97 |   10.00
-(10 rows)
+(5 rows)
 ```
 
 Ah, much better.
