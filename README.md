@@ -150,7 +150,7 @@ Looking at the output below, it's cool to see that we've effectively "binned" th
 (5 rows)
 ```
 
-### Pull 10 spectra for the "vent" patch in this recasted form
+### Pull 5 spectra for the "vent" patch in this recasted form
 What if we want to pull these reshaped spectra for only a certain patch? We can combine the reshaping with `WHERE` filtering and then use `GROUP BY` and pick the patch and spec ID.
 ```sql
 SELECT spectra.spec_id spec, patches.region patch,
@@ -175,6 +175,7 @@ Here's the output:
    58 | vent  |    0.03 |    0.55 |    4.20 |   11.22
    96 | vent  |    0.28 |    1.65 |    2.86 |    4.34
   134 | vent  |    1.53 |    1.93 |    4.16 |    9.69
+  172 | vent  |    3.21 |    3.45 |    7.90 |   15.52
 (5 rows)
 ```
 
